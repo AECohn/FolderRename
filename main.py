@@ -33,10 +33,5 @@ def WriteLog(list, fileName):
     for logValue in list:
       file.write(f"{logValue}\n")
 
-# Specify the starting directory
-start_dir = "C:\Workbench\_temp"
-
-
-# Start the process
 startDir = input("what directory should we use?")
 rename_control_folder(startDir)
