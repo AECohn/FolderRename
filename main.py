@@ -1,21 +1,18 @@
 import os
-
-folderNamesToChange = [] #list of folder names to change here
+folderNamesToChange = []
 renameLog = []
 counter = 0
 
-def rename_control_folder(folderPath):
+def renameControlFolder(folderPath, folderNames):
   for root, directories, files in os.walk(folderPath):
     for directory in directories:
-      if directory in folderNamesToChange:
+      if directory in folderNames:
         old_directory = directory
         old_path = os.path.join(root, directory)
         parent_name = os.path.basename(root)
         new_path = os.path.join(root, f"{parent_name}.{old_directory}")
         os.rename(old_path, new_path)
         LogStuff(old_path, new_path, folderPath)
-
-
   print(f'{counter} folders renamed')
 
 def LogStuff(old, new, path):
@@ -34,4 +31,4 @@ def WriteLog(list, fileName):
       file.write(f"{logValue}\n")
 
 startDir = input("what directory should we use?")
-rename_control_folder(startDir)
+renameControlFolder(startDir, folderNamesToChange)
