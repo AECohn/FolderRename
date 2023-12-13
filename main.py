@@ -1,6 +1,6 @@
 import os
 
-folderNamesToChange = ["Control", "GUI", "UI"]
+folderNamesToChange = ["Control", "GUI", "UI", "control", "gui", "ui"]
 renameLog = []
 counter = 0
 
