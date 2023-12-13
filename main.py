@@ -38,4 +38,5 @@ start_dir = "C:\Workbench\_temp"
 
 
 # Start the process
-rename_control_folder(start_dir)
+startDir = input("what directory should we use?")
+rename_control_folder(startDir)
