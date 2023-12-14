@@ -2,7 +2,7 @@ import os
 folderNamesToChange = []
 renameLog = []
 counter = 0
-
+#To-Do: Program should initially build a list of all folders that will be renamed, the user can then enter an index id to remove that index from the list, and then after confirming, the remaining folders in the list will be renamed
 def renameControlFolder(folderPath, folderNames):
   for root, directories, files in os.walk(folderPath):
     for directory in directories:
