@@ -4,8 +4,7 @@ foldernamestochange = ["test", "ui"]
 root_path = ""
 
 
-# To-Do: Program should initially build a list of all folders that will be renamed,
-# the user can then enter an index id to remove that index from the list, and then after confirming, the remaining folders in the list will be renamed
+
 def build_rename_list(folderpath, foldernames):
     global root_path
     root_path = folderpath
@@ -18,18 +17,6 @@ def build_rename_list(folderpath, foldernames):
                 new_path = os.path.join(root, f"{parentname}.{directory}")
                 folder_names.append((old_path, new_path))
     return folder_names
-
-
-'''def buildList(old, new, path):
-    global counter
-    
-    writelog(renamelist, path + r"\renamelog.txt")'''
-
-
-'''def writelog(folderlist, filename):
-    with open(filename, "w") as file:  # 'w' is the write mode
-        for logValue in folderlist:
-            file.write(f"{logValue}\n")'''
 
 #User Stuff
 startDir = input("what directory should we use?")
