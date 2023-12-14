@@ -1,39 +1,38 @@
 import os
-
-foldernamestochange = ["test", "ui"]
 root_path = ""
 
 
-
-def build_rename_list(folderpath, foldernames):
+def build_rename_list(folder_path, folder_names):
     global root_path
-    root_path = folderpath
-    folder_names = []
-    for root, directories, files in os.walk(folderpath):
+    folders_to_change = []
+    root_path = folder_path
+    for root, directories, files in os.walk(folder_path):
         for directory in directories:
-            if directory in foldernames:
+            if directory in folder_names:
                 old_path = os.path.join(root, directory)
-                parentname = os.path.basename(root)
-                new_path = os.path.join(root, f"{parentname}.{directory}")
-                folder_names.append((old_path, new_path))
-    return folder_names
+                parent_name = os.path.basename(root)
+                new_path = os.path.join(root, f"{parent_name}.{directory}")
+                folders_to_change.append((old_path, new_path))
+    return folders_to_change
 
-#User Stuff
-startDir = input("what directory should we use?")
-templist = build_rename_list(startDir, foldernamestochange)
+
+# User Stuff
+start_dir = input("what directory should we use?")
+folder_names_to_change = input("Which folder names should we look for? Please separate them with a comma, then press enter").split(",")
+temp_list = build_rename_list(start_dir, folder_names_to_change)
 while True:
-    for index, folder in enumerate(templist):
-        print(f"{str(index+1)} {folder[0]} will be renamed to {folder[1]}")
+    for index, folder in enumerate(temp_list):
+        print(f"{str(index + 1)} {folder[0]} will be renamed to {folder[1]}")
     response = input("to remove an index, enter the number of the index to remove, otherwise press 'y' to rename")
     if response != 'y':
         if response.isalnum():
-            templist.remove(templist[int(response)-1])
+            temp_list.remove(temp_list[int(response) - 1])
     else:
         with open(root_path + r"\renamelog.txt", "w") as file:  # 'w' is the write mode
-            for value in templist:
+            counter = 0
+            for value in temp_list:
                 file.write(f"{value[0]} was renamed to {value[1]}\n")
                 os.rename(value[0], value[1])
+                counter += 1
+            print(f"{counter} folders were renamed")
         break
-
-#def renamefolders(folderlist):
-    #for folder in folderlist:
