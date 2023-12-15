@@ -17,7 +17,7 @@ def build_rename_list(folder_path, folder_names):
 
 
 # User Stuff
-start_dir = input("what directory should we use?")
+start_dir = input("Which directory should we use?")
 folder_names_to_change = input("Which folder names should we look for? Please separate them with a comma, then press enter").split(",")
 temp_list = build_rename_list(start_dir, folder_names_to_change)
 while True:
@@ -31,8 +31,13 @@ while True:
         with open(root_path + r"\renamelog.txt", "w") as file:  # 'w' is the write mode
             counter = 0
             for value in temp_list:
-                file.write(f"{value[0]} was renamed to {value[1]}\n")
-                os.rename(value[0], value[1])
-                counter += 1
-            print(f"{counter} folders were renamed")
+                if os.path.exists(value[1]):
+                    print(f'{value[1]} already exists')
+                    break
+                else:
+                    os.rename(value[0], value[1])
+                    if os.path.exists(value[1]): # check to see if the folder was rnamed succesfully
+                        counter += 1
+                        file.write(f"{counter} {value[0]} was renamed to {value[1]}\n")
+            print(f"{counter} folders were renamed")  # To-Do
         break
